@@ -3,14 +3,13 @@ import tensorflow as tf
 import numpy as np
 
 app = Flask(__name__)
+gen_model = tf.keras.models.load_model("./static/anime_generator_save")
+config = gen_model.get_config()
+noise_dim = config["layers"][0]["config"]["batch_input_shape"][-1]
 
 
 @app.route("/")
 def hello_world():
-    gen_model = tf.keras.models.load_model("./anime_generator_save")
-    config = gen_model.get_config()
-    noise_dim = config["layers"][0]["config"]["batch_input_shape"][-1]
-
     random_noise = [tf.random.normal(shape=(1, noise_dim), seed=seed) for seed in range(1)]
     random_noise = np.asarray(random_noise).reshape(1, noise_dim)
 
