@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 
 app = Flask(__name__)
-gen_model = tf.keras.models.load_model("./static/anime_generator_save")
+gen_model = tf.keras.models.load_model("./static/swords_generator_save")
 config = gen_model.get_config()
 noise_dim = config["layers"][0]["config"]["batch_input_shape"][-1]
 
